@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 
 {
+    public AudioClip coinClip;
+    public AudioClip hazardClip;
     public GameManager gm;
     public float speed = 5;
 // Start is called before the first frame update
@@ -34,13 +36,20 @@ void Start()
         if (collision.gameObject.tag == "Coin")
         {
             gm.IncrementScore(1);
+
+            gm.PlaySound(coinClip);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.tag == "Hazard")
         {
+            gm.PlaySound(hazardClip);
             Destroy(gameObject);
         }
         
-        
+        if (collision.gameObject.tag == "Item")
+        {
+            Destroy(collision.gameObject);
+            Debug.Log("Theme changed");
+        }
     }
 }

@@ -12,9 +12,13 @@ public class GameManager : MonoBehaviour
     public Transform rightTran;
 
     public TextMeshPro scoreText;
+
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         InvokeRepeating("SpawnItem", 0, 2);
         
     }
@@ -41,5 +45,10 @@ public class GameManager : MonoBehaviour
     public void IncrementScore(int value)
     {
         score += value;
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 }
